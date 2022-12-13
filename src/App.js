@@ -3,6 +3,7 @@ import { useState } from 'react'
 import NewOrderPage from './pages/NewOrderPage';
 import AuthPage from './pages/AuthPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
+import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -11,12 +12,16 @@ function App() {
 
   return (
     <main className="App">
+
       {
         user ? 
+        <>
+          <NavBar />
           <Routes>
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route path="/orders" element={<OrderHistoryPage />} />
           </Routes>
+        </>
         : 
           <AuthPage />
       }
