@@ -5,9 +5,10 @@ import AuthPage from './pages/AuthPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom'
+import { getUser } from './utilities/users-service';
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(getUser())
 
 
   return (
@@ -16,14 +17,14 @@ function App() {
       {
         user ? 
         <>
-          <NavBar />
+          <NavBar name={user.name} setUser={setUser} />
           <Routes>
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route path="/orders" element={<OrderHistoryPage />} />
           </Routes>
         </>
         : 
-          <AuthPage />
+          <AuthPage setUser={setUser} />
       }
     </main>
   );
