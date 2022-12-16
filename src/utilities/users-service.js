@@ -4,7 +4,7 @@ export async function signUp(userData) {
    // Delegate the network request code to the users-api.js API module
   // which will ultimately return a JSON Web Token (JWT)
   const token = await usersAPI.signUp(userData);
-  
+
   localStorage.setItem("token", token)
   return getUser()
 }
@@ -47,4 +47,12 @@ export function getUser() {
 
 export function logOut() {
   localStorage.removeItem('token')
+}
+
+export function checkToken() {
+  // Just so that you don't forget how to use .then
+  return usersAPI.checkToken()
+    // checkToken returns a string, but let's
+    // make it a Date object for more flexibility
+    .then(dateStr => new Date(dateStr));
 }
